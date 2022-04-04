@@ -156,3 +156,57 @@ TODO: написать sync wrapper на python
 `endDate`:       1650323926<br>
 `university_id`: 22<br>
 `group_id:`      54662<br>
+
+
+## Список преподавателей:
+
+`GET` `https://sked.mobi/api/v4/teachers` `HTTP/1.1`
+
+В headers:
+`Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
+
+С параметрами:<br>
+`group_id`: Ид_группы<br>
+
+Ответ: json
+
+Пример запроса:
+
+`GET` `https://sked.mobi/api/v4/teachers?group_id=54662` `HTTP/1.1`
+
+В headers:
+`Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
+
+С параметрами:
+group_id: 54662
+
+Ответ:
+
+```json
+{
+    "code": 200,
+    "data": [
+        {
+            "degree": "",
+            "discipline": "Информатика и программирование, п/г 1",
+            "first_name": "Ася",
+            "id": 91297,
+            "is_my": true,
+            "last_name": "асс.Атаян",
+            "second_name": "Михайловна"
+        },
+        {
+            "degree": "",
+            "discipline": "Информатика и программирование, п/г 2",
+            "first_name": "Наталья",
+            "id": 168803,
+            "is_my": true,
+            "last_name": "асс.Щербинина",
+            "second_name": "Игоревна"
+        },
+        ...
+    ],
+    "errDescr": "",
+    "message": "ok"
+}
+```
