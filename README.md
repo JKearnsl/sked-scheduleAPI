@@ -132,7 +132,7 @@ TODO: написать sync wrapper на python
 
 `GET` `https://sked.mobi/api/v4/lessons` `HTTP/1.1`
 
-В headers:
+В headers:<br>
 `Authorization`: `Bearer access_token...`
 
 С параметрами запроса:<br>
@@ -148,7 +148,7 @@ TODO: написать sync wrapper на python
 
 `GET` `https://sked.mobi/api/v4/lessons?startDate=1648426726&endDate=1650323926&university_id=22&group_id=54662` `HTTP/1.1`
 
-В headers:
+В headers:<br>
 `Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
 
 Параметры запроса:<br>
@@ -162,7 +162,7 @@ TODO: написать sync wrapper на python
 
 `GET` `https://sked.mobi/api/v4/teachers` `HTTP/1.1`
 
-В headers:
+В headers:<br>
 `Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
 
 С параметрами:<br>
@@ -174,7 +174,7 @@ TODO: написать sync wrapper на python
 
 `GET` `https://sked.mobi/api/v4/teachers?group_id=54662` `HTTP/1.1`
 
-В headers:
+В headers:<br>
 `Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
 
 С параметрами:
