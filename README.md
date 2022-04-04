@@ -38,6 +38,7 @@ TODO: написать sync wrapper на python
     "errDescr": "",
     "message": "ok"
 }
+```
 
 ## Выбор группы
 
