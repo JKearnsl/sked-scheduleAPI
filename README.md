@@ -45,8 +45,8 @@ TODO: написать sync wrapper на python
 `GET` `https://sked.mobi/api/v4/groups` `HTTP/1.1`
 
 С параметрами запроса:<br>
-`name`: `ГРУППА`<br>
-`university_id`: `ИД ВУЗА`<br>
+`name`: Название_группы<br>
+`university_id`: Ид_вуза<br>
 
 Пример:
 
