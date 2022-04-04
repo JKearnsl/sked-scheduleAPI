@@ -44,9 +44,9 @@ TODO: написать sync wrapper на python
 
 `GET` `https://sked.mobi/api/v4/groups` `HTTP/1.1`
 
-С параметрами запроса:
-`name` = `ГРУППА`
-`university_id` = `ИД ВУЗА`
+С параметрами запроса:<br>
+`name`: `ГРУППА`<br>
+`university_id`: `ИД ВУЗА`<br>
 
 Пример:
 
@@ -135,11 +135,11 @@ TODO: написать sync wrapper на python
 В headers:
 `Authorization`: `Bearer access_token...`
 
-С параметрами запроса:
-`startDate`:     Начальная_дата_в_сек
-`endDate`:       Конечная_дата_в_сек
-`university_id`: Ид_университета
-`group_id:`      Ид_группы
+С параметрами запроса:<br>
+`startDate`:     Начальная_дата_в_сек<br>
+`endDate`:       Конечная_дата_в_сек<br>
+`university_id`: Ид_университета<br>
+`group_id:`      Ид_группы<br>
 
 Ответ: json расписание
 
@@ -151,8 +151,8 @@ TODO: написать sync wrapper на python
 В headers:
 `Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
 
-Параметры запроса:
-`startDate`:     1648426726
-`endDate`:       1650323926
-`university_id`: 22
-`group_id:`      54662
+Параметры запроса:<br>
+`startDate`:     1648426726<br>
+`endDate`:       1650323926<br>
+`university_id`: 22<br>
+`group_id:`      54662<br>
