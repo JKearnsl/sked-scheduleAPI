@@ -72,3 +72,87 @@ TODO: написать sync wrapper на python
     "message": "ok"
 }
 ```
+
+## Получение токена
+
+`POST` `https://sked.mobi/api/v4/token` `HTTP/1.1`
+
+С json data:
+
+```json
+{
+    "device_id": "uuid(можно рандомный)",
+    "group_id": ид_группы
+}
+```
+
+ответ:
+
+```json
+{
+    "code": 200,
+    "data": {
+        "access_token": "eyJVc2VySWQiOjg5NDcyNCwiRGV2..."
+    },
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+
+Пример запроса:
+
+
+`POST` `https://sked.mobi/api/v4/token` `HTTP/1.1`
+
+С json data:
+
+```json
+{
+    "device_id": "7320768f-600d-42fb-8820-f54c60abb440",
+    "group_id": 54662
+}
+```
+
+
+ответ:
+
+```json
+{
+    "code": 200,
+    "data": {
+        "access_token": "eyJVc2VySWQiOjg5NDcyNCwiRGV2..."
+    },
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+## Получение расписания
+
+`GET` `https://sked.mobi/api/v4/lessons` `HTTP/1.1`
+
+В headers:
+`Authorization`: `Bearer access_token...`
+
+С параметрами запроса:
+`startDate`:     Начальная_дата_в_сек
+`endDate`:       Конечная_дата_в_сек
+`university_id`: Ид_университета
+`group_id:`      Ид_группы
+
+Ответ: json расписание
+
+
+Пример:
+
+`GET` `https://sked.mobi/api/v4/lessons?startDate=1648426726&endDate=1650323926&university_id=22&group_id=54662` `HTTP/1.1`
+
+В headers:
+`Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
+
+Параметры запроса:
+`startDate`:     1648426726
+`endDate`:       1650323926
+`university_id`: 22
+`group_id:`      54662
