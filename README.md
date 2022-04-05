@@ -1,4 +1,4 @@
-# sket-scheduleAPI
+# sked-scheduleAPI
 API приложения sked - расписание занятий для ВУЗов
 
 
