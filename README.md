@@ -163,7 +163,7 @@ TODO: написать sync wrapper на python
 `GET` `https://sked.mobi/api/v4/teachers` `HTTP/1.1`
 
 В headers:<br>
-`Authorization`: `Bearer eyJVc2VySWQiOjg5NDcyNC...`
+`Authorization`: `Bearer access_token...`
 
 С параметрами:<br>
 `group_id`: Ид_группы<br>
@@ -208,5 +208,258 @@ group_id: 54662
     ],
     "errDescr": "",
     "message": "ok"
+}
+```
+
+## Кол-во публичных задач
+
+`GET` `https://sked.mobi/api/v4/counters` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": {
+        "shared_tasks": 1
+    }
+}
+```
+
+## Список задач
+
+`GET` `https://sked.mobi/api/v4/Tasks` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": [],
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+## Список публичных расшаренных (доступных) задач
+
+`GET` `https://sked.mobi/api/v4/Tasks/shared` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": [
+        {
+            "attachments": null,
+            "author": "Sked",
+            "author_page": "https://t.me/university_open",
+            "can_edit": false,
+            "create_date": 1629068941,
+            "deadline": 0,
+            "id": 159969,
+            "is_public": true,
+            "lesson": null,
+            "lesson_id": null,
+            "remind_date": 0,
+            "reminder": "no",
+            "share_date": 1629068941,
+            "status": "inbox",
+            "text": "Теперь при создании задачи вы можете сделать её публичной – она будет доступна для просмотра всем в вашей группе.\n\nАвтор задачи может устанавливать дедлайн, прикреплять информацию о занятии и вносить изменения которые будут доступны всем.",
+            "title": "Создавайте публичные задачи ",
+            "tracking": 0
+        }
+    ],
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+## Изменить статус задачи (Принять/Отклонить)
+
+`POST` `https://sked.mobi/api/v4/Tasks/status` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+В дата передается json:
+
+```json
+{
+    "id": 159969,
+    "status": "ACTIVE"
+}
+```
+
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": {
+        "attachments": null,
+        "author": "Sked",
+        "author_page": "https://t.me/university_open",
+        "can_edit": false,
+        "create_date": 1649192437,
+        "deadline": 0,
+        "id": 576678,
+        "is_public": true,
+        "lesson": null,
+        "lesson_id": null,
+        "remind_date": 0,
+        "reminder": "no",
+        "share_date": 1629068941,
+        "status": "active",
+        "text": "Теперь при создании задачи вы можете сделать её публичной – она будет доступна для просмотра всем в вашей группе.\n\nАвтор задачи может устанавливать дедлайн, прикреплять информацию о занятии и вносить изменения которые будут доступны всем.",
+        "title": "Создавайте публичные задачи ",
+        "tracking": 0
+    },
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+Заметьте в data->status значение поменялось с "inbox" на "active"
+
+
+# Создание задачи
+
+Для создания публичной задачи (доступной всем в группе), потребуется
+авторизация в ВК, для остальных(приватных) - не потребуется.
+
+## Загрузка файла для задачи
+
+Чтобы загрузить файл, нужно выполнить ряд действий
+
+### Получение ссылки на загрузку
+
+`POST` `https://sked.mobi/api/v4/resources` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+В дата передается json:
+
+```json
+{
+    "filename": "pick_photo-766564743.jpg"
+}
+```
+
+"pick_photo-766564743.jpg" - имя файла на устройстве
+
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": {
+        "attachment_id": 3188,
+        "ext": ".jpg",
+        "url": "https://sked1.fra1.digitaloceanspaces.com/pick_photo-766564743_637847896380634156.jpg?AWSAccessKeyId=WAOODPZG7QQALEHHOCB7&Expires=1649193258&Signature=RgocH1he2vLWV0Xkdm2nGuXGYU0%3D"
+    },
+    "errDescr": "",
+    "message": "ok"
+}
+```
+
+Теперь можно по этой ссылке загрузить файл на сервер
+
+### Загрузка файла на сервер
+
+По полученной ссылке из пункта "Получение ссылки на загрузку"<br>
+Выполняем `put` запрос на данную ссылку и передаем картинку
+в формате `binary/octet-stream`
+
+Пример запроса:
+
+![img.png](img_upload_pic.png)
+
+Файл загружен, можно приступать к созданию задачи 
+
+
+## Создание задачи
+
+`POST` `https://sked.mobi/api/v4/Tasks` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+В дата передается json:
+
+```json
+{
+    "attachments": [
+        {
+            "id": 3188
+        }
+    ],
+    "deadline": 1649970398,
+    "id": 0,
+    "is_public": false,
+    "remind_date": 1649106410,
+    "reminder": "CUSTOM",
+    "status": "ACTIVE",
+    "text": "Testdescr",
+    "title": "Test"
+}
+```
+
+Подробно рассмотрим некоторые моменты
+
+`"attachments"` содержит ид вложенных файлов;<br>
+пример `"id": 3188` взят из пункта "Загрузка файла для задачи"
+
+`"deadline": 1649970398` содержит время завершения
+
+`"remind_date": 1649106410` содержит время напоминания
+
+
+Пример ответа:
+
+```json
+{
+    "code": 201,
+    "data": {
+        "attachments": [
+            {
+                "ext": ".jpg",
+                "id": 3188,
+                "name": "pick_photo-766564743.jpg",
+                "url": "https://sked1.fra1.digitaloceanspaces.com/pick_photo-766564743_637847896380634156.jpg"
+            }
+        ],
+        "author": null,
+        "author_page": null,
+        "can_edit": true,
+        "create_date": 1649182040,
+        "deadline": 1649970398,
+        "id": 576680,
+        "is_public": false,
+        "lesson": null,
+        "lesson_id": null,
+        "remind_date": 1649106410,
+        "reminder": "custom",
+        "share_date": 0,
+        "status": "active",
+        "text": "Testdescr",
+        "title": "Test",
+        "tracking": 0
+    },
+    "errDescr": "",
+    "message": "Created new task"
 }
 ```
