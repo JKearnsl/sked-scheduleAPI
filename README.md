@@ -463,3 +463,22 @@ group_id: 54662
     "message": "Created new task"
 }
 ```
+
+
+## Удаление задачи:
+
+`DELETE` `https://sked.mobi/api/v4/Tasks/576680` `HTTP/1.1`
+
+В headers:<br>
+`Authorization`: `Bearer access_token...`
+
+Пример ответа:
+
+```json
+{
+    "code": 200,
+    "data": null,
+    "errDescr": "",
+    "message": "Task removed"
+}
+```
