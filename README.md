@@ -2,9 +2,6 @@
 API приложения sked - расписание занятий для ВУЗов
 
 
-TODO: написать sync wrapper на python
-
-
 ## Выбор университета:
 
 `GET` `https://sked.mobi/api/v4/universities` `HTTP/1.1`
